@@ -15,9 +15,7 @@ var express = require('express');
 var favicon = require('serve-favicon');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-var mongoose = require('mongoose');
 var Conf = require('./conf');
-var Model = require('./model');
 var Util = require('./util');
 var app = express();
 var port = process.env.PORT || 5000;
@@ -36,26 +34,6 @@ app.use(cookieParser());
 // Api Middlewares
 app.use('/post', require('./api/post'));
 app.use('/tag', require('./api/tag'));
-
-// Mongoose events
-mongoose.connection.on('error', function(err){
-  console.log('Mongoose error:', err);
-});
-
-mongoose.connection.on('disconnected', function(){
-  console.log('Mongoose disconnected!');
-});
-
-mongoose.set('debug', true);
-
-mongoose.connect(Conf.mongo_config.connect_string(), { db: { safe:true } }, function(err){
-	if (err) {
-		throw err;
-	}
-	else {
-		console.log('Mongoose Connected');
-	}
-});
 
 app.get('/', function(req, res){
 	res.send('Share Goodness');
