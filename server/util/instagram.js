@@ -9,13 +9,6 @@ function ComfyInstagram(config) {
 	    , client_secret: config.client_secret
 	});
 
-	// ig.del_subscription({ all: true }, function(err, subscriptions, remaining, limit){
-	// 	ig.add_tag_subscription('sharegoodness', 'http://sharegoodness.herokuapp.com/tag/sharegoodness', function(err, result, remaining, limit){
-	// 		console.log('Sub err:', err);
-	// 		console.log('Result:', result);
-	// 	});
-	// });
-
 	this.api = ig;
 
 }
@@ -60,7 +53,40 @@ ComfyInstagram.prototype.getPosts = function(maxTagId, gotPosts) {
 
 	});
 
-}
+};
+
+ComfyInstagram.prototype.getPost = function(postId, gotIt) {
+
+	var api = this.api;
+
+	api.media(postId, function(err, post) {
+
+		if (err) {
+			gotIt(err);
+		}
+		else {
+
+			if (!validPost(post)) {
+				return gotIt('Not a valid post');
+			}
+			else {
+				gotIt(null, {
+					text: post.caption.text.replace(/#/g, " #").replace(/  /g, " ")
+					, image: post.images.standard_resolution.url
+					, name: post.user.full_name
+					, avatar: post.user.profile_picture
+					, link: post.link
+					, provider: 'instagram'
+					, id: post.id
+					, date_posted: new Date(Number(post.created_time + '000'))
+				});	
+			}
+
+		}
+
+	});
+
+};
 
 function validPost(post) {
 	return post.type == "image" && post.caption && post.created_time && post.caption.text && post.images && post.images.standard_resolution && post.images.standard_resolution.url && post.user && post.user.full_name && post.user.profile_picture;

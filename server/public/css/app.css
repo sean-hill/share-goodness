@@ -1,0 +1,67 @@
+/* Share Goodness Web CSS */
+
+body {
+	font-family: 'Open Sans';
+}
+
+.logo img {
+	max-width: 100%;
+}
+
+.post {
+	margin-top: 50px;
+}
+
+.post-image {
+	width: 100%;
+}
+
+.post-title .avatar, .post-title .title {
+	float: left;
+}
+
+.post-title .avatar {
+	width: 50px;
+	height: 50px;
+	margin-right: 10px;
+}
+
+.post-title .avatar img {
+	width: 100%;
+}
+
+.post-title h1, .post-title h3 {
+	margin: 0;
+	font-weight: normal;
+}
+
+.post-title h1 {
+	font-size: 20px;
+	margin-bottom: 8px;
+	overflow: hidden;
+	white-space: nowrap;
+	display: inline-block;
+	text-overflow: ellipsis;
+	width: 250px;
+}
+
+.post-title h3 {
+	font-size: 14px;
+	color: #888;
+}
+
+.post-text {
+	color: #888;
+}
+
+.clearfix:after {
+	clear: both;
+	display: block;
+	content: " ";
+	height: 0px;
+	visibility: hidden;
+}
+
+.clearfix {
+	display: inline-block;
+}

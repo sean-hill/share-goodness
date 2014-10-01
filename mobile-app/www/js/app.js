@@ -40,7 +40,7 @@ angular.module('ShareGoodness', ['ionic', 'timeago', 'ngCordova'])
 
   $scope.getPosts = function(refreshPosts) {
 
-    $http.post('http://192.168.1.149:5000/post/test', { maxTagId: $scope.maxTagId })
+    $http.post('http://192.168.1.149:5000/post/get', { maxTagId: $scope.maxTagId })
       .success(function(res){
 
         if (refreshPosts) {

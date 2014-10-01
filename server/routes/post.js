@@ -1,6 +1,6 @@
 // A Goodness Post Route
 
-exports.getPosts = function(req, res) {
+exports.get = function(req, res) {
 
 	console.log('Querying for', req.body.maxTagId);
 
@@ -13,4 +13,13 @@ exports.getPosts = function(req, res) {
 
 	});
 
+};
+
+exports.view = function(req, res) {
+
+	Util.Instagram.getPost(req.params.post_id, function(err, post){
+		res.locals = post;
+		res.render('view');
+	});
+	
 };
